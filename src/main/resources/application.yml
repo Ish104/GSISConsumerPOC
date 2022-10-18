@@ -1,33 +1,33 @@
 kafka:
   listener:
-    concurrency: 1
-    ack-mode: MANUAL_IMMEDIATE
+    concurrency: ${kafka_concurrency}
+    ack-mode:${ack-mode}
   auto:
     create:
       topics:
         enable: false
-  bootstrapserver: pkc-lq8gm.westeurope.azure.confluent.cloud:9092
+  bootstrapserver: ${kafka-bootstrap-server}
   properties:
     saslRequired: true
     schema.sasl.mechanism: true
     ssl.endpoint.identification.algorithm: https
     sasl.mechanism: PLAIN
-    request.timeout.ms: 20000
-    retry.backoff.ms: 500
-    sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username= "LX5UDF5FKEAIHCYC" password="0Zf8HkRMUvSwLKryGYo+Uk2XNIbduktoxMQ2jY2EmBmKx9OnVIYCcm8EUGquoCRE";
+    request.timeout.ms: ${kafkaRequestTimeoutMs}
+    retry.backoff.ms: ${kafkaRetryBackoffMs}
+    sasl.jaas.config: ${sasl_jass_config}
     security.protocol: SASL_SSL
-    schema.registry.url: https://psrc-4kk0p.westeurope.azure.confluent.cloud/
+    schema.registry.url: ${schema-registry-url}
     basic.auth.credentials.source: USER_INFO
-    schema.registry.basic.auth.user.info: I2WOGC3S6UQMR3KT:vk4Th6eSdHoSVhdagDMtQVnqbkWAFCUdoNGcrylSmQMP9uYZwPVIKJy5zNFY5HDk
-    max.poll.interval.ms: 300000
-    session.timeout.ms: 60000
-    heartbeat.interval.ms: 20000
-    max.poll.records: 300
+    schema.registry.basic.auth.user.info: ${schema_registry_auth}
+    max.poll.interval.ms: ${maxPollIntervalMsConfig}
+    session.timeout.ms: ${sessionTimeoutMsConfig}
+    heartbeat.interval.ms: ${heartbeatIntervalMsConfig}
+    max.poll.records: ${maxPollRecordsConfig}
   consumer:
     topics:
-      gsis-topic: MSK.schedule.datedSchedule.topic.public.any.v5
+      gsis-topic: ${response-topic-name}
     groupIds:
-      gsis-group-id: MSK.imports.arrivalnoticegsis.consumerGroup.v1
+      gsis-group-id: ${consumer-group-id}
     enable-consumer:
       gsis: true
       bcp: true

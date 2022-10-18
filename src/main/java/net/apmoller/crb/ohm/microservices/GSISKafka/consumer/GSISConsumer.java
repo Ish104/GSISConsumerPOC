@@ -1,7 +1,9 @@
 package net.apmoller.crb.ohm.microservices.GSISKafka.consumer;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 
+import net.apmoller.crb.ohm.microservices.GSISKafka.models.gsis.ScheduleEntries;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.header.Header;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +25,17 @@ public class GSISConsumer {
             "${kafka.consumer.topics.gsis-topic}" }, groupId = "#{'${kafka.consumer.groupIds.gsis-group-id}'}", containerFactory = "gsisListenerContainerFactory")
     public void recievingKafkaMessage( @Payload ConsumerRecord<String, Object> request,
                                               Acknowledgment acknowledgment) {
-
+        ScheduleEntries scheduleEntries=null;
         try
         {
-            if(checkScheduleEtaUpdatedEvent(request))
-                log.info("request: "+request.value());
+            scheduleEntries=new ObjectMapper().readValue(String.valueOf(request),ScheduleEntries.class);
+            log.info("scheduleEntries object: "+scheduleEntries.getScheduleEntry().get(0).getArrivalStatus());
+//            if(checkScheduleEtaUpdatedEvent(request))
+//            {
+//                scheduleEntries=new ObjectMapper().readValue(String.valueOf(request),ScheduleEntries.class);
+//                log.info("scheduleEntries object: "+scheduleEntries.getScheduleEntry().getArrivalStatus());
+//            }
+
         }
         catch(Exception e)
         {

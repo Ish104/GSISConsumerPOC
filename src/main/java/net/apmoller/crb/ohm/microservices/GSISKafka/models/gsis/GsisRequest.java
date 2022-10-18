@@ -12,11 +12,8 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ScheduleEntryID {
+public class GsisRequest {
 
-    @JsonProperty("scheduleEntryKey")
-    private String scheduleEntryKey;
-    @JsonProperty("scheduleEntryIdentifier")
-    private List<ScheduleEntryIdentifier> scheduleEntryIdentifier;
-
+    @JsonProperty("scheduleEntries")
+    private List<ScheduleEntries> scheduleEntries;
 }

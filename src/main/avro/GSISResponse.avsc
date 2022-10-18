@@ -1,0 +1,399 @@
+{
+  "connect.name": "emp.maersk.com.datedSchedule",
+  "fields": [
+    {
+      "name": "scheduleEntries",
+      "type": {
+        "connect.name": "emp.maersk.com.scheduleEntries",
+        "fields": [
+          {
+            "name": "scheduleEntry",
+            "type": {
+              "items": {
+                "connect.name": "emp.maersk.com.scheduleEntry_record",
+                "fields": [
+                  {
+                    "name": "rotationId",
+                    "type": "string"
+                  },
+                  {
+                    "name": "rotationName",
+                    "type": "string"
+                  },
+                  {
+                    "name": "rotationVersion",
+                    "type": "string"
+                  },
+                  {
+                    "name": "scheduleEntryID",
+                    "type": {
+                      "connect.name": "emp.maersk.com.scheduleEntryID",
+                      "fields": [
+                        {
+                          "name": "scheduleEntryKey",
+                          "type": "string"
+                        },
+                        {
+                          "name": "scheduleEntryIdentifier",
+                          "type": {
+                            "connect.name": "emp.maersk.com.scheduleEntryIdentifier",
+                            "fields": [
+                              {
+                                "name": "vessel",
+                                "type": {
+                                  "connect.name": "emp.maersk.com.vessel",
+                                  "fields": [
+                                    {
+                                      "name": "vesselCode",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "IMONumber",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "vesselName",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "vesselOperatorCode",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "vesselFlag",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "vesselCallSign",
+                                      "type": "string"
+                                    }
+                                  ],
+                                  "name": "vessel",
+                                  "type": "record"
+                                }
+                              },
+                              {
+                                "name": "arrivalVoyage",
+                                "type": {
+                                  "connect.name": "emp.maersk.com.arrivalVoyage",
+                                  "fields": [
+                                    {
+                                      "name": "voyage",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "direction",
+                                      "type": "string"
+                                    }
+                                  ],
+                                  "name": "arrivalVoyage",
+                                  "type": "record"
+                                }
+                              },
+                              {
+                                "name": "departureVoyage",
+                                "type": {
+                                  "connect.name": "emp.maersk.com.departureVoyage",
+                                  "fields": [
+                                    {
+                                      "name": "voyage",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "direction",
+                                      "type": "string"
+                                    }
+                                  ],
+                                  "name": "departureVoyage",
+                                  "type": "record"
+                                }
+                              },
+							  {
+                                "name": "arrivalService",
+                                "type": {
+                                  "connect.name": "emp.maersk.com.arrivalService",
+                                  "fields": [
+                                    {
+                                      "name": "code",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "name",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "transportMode",
+                                      "type": "string"
+                                    }
+                                  ],
+                                  "name": "arrivalService",
+                                  "type": "record"
+                                }
+                              },
+							  {
+                                "name": "departureService",
+                                "type": {
+                                  "connect.name": "emp.maersk.com.departureService",
+                                  "fields": [
+                                    {
+                                      "name": "code",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "name",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "transportMode",
+                                      "type": "string"
+                                    }
+                                  ],
+                                  "name": "departureService",
+                                  "type": "record"
+                                }
+                              },
+                              {
+                                "name": "previousPortCall",
+                                "type": {
+                                  "connect.name": "emp.maersk.com.previousPortCall",
+                                  "fields": [
+                                    {
+                                      "name": "cityCode",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "terminalCode",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "cityName",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "terminalName",
+                                      "type": "string"
+                                    },
+				                            {
+                                      "name": "cityGeoCode",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "terminalGeoCode",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "previousScheduleEntryKey",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "arrivalVoyage",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "departureVoyage",
+                                      "type": "string"
+                                    }
+                                  ],
+                                  "name": "previousPortCall",
+                                  "type": "record"
+                                }
+                              },
+                              {
+                                "name": "currentPortCall",
+                                "type": {
+                                  "connect.name": "emp.maersk.com.currentPortCall",
+                                  "fields": [
+                                    {
+                                      "name": "cityCode",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "terminalCode",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "cityName",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "terminalName",
+                                      "type": "string"
+                                    },
+				                            {
+                                      "name": "cityGeoCode",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "terminalGeoCode",
+                                      "type": "string"
+                                    }
+                                  ],
+                                  "name": "currentPortCall",
+                                  "type": "record"
+                                }
+                              },
+                              {
+                                "name": "nextPortCall",
+                                "type": {
+                                  "connect.name": "emp.maersk.com.nextPortCall",
+                                  "fields": [
+                                    {
+                                      "name": "cityCode",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "terminalCode",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "cityName",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "terminalName",
+                                      "type": "string"
+                                    },
+				                            {
+                                      "name": "cityGeoCode",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "terminalGeoCode",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "nextScheduleEntryKey",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "arrivalVoyage",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "name": "departureVoyage",
+                                      "type": "string"
+                                    }
+                                  ],
+                                  "name": "nextPortCall",
+                                  "type": "record"
+                                }
+                              }
+                            ],
+                            "name": "scheduleEntryIdentifier",
+                            "type": "record"
+                          }
+                        }
+                      ],
+                      "name": "scheduleEntryID",
+                      "type": "record"
+                    }
+                  },
+                  {
+                    "name": "arrivalStatus",
+                    "type": "string"
+                  },
+                  {
+                    "name": "departureStatus",
+                    "type": "string"
+                  },
+                  {
+                    "name": "siteCallStatus",
+                    "type": "string"
+                  },
+                  {
+                    "name": "pH1",
+                    "type": "string"
+                  },
+                  {
+                    "name": "pH2",
+                    "type": "string"
+                  },
+                  {
+                    "name": "schedule",
+                    "type": {
+                      "connect.name": "emp.maersk.com.schedule",
+                      "fields": [
+                        {
+                          "name": "proformaArrival",
+                          "type": "string"
+                        },
+                        {
+                          "name": "proformaDeparture",
+                          "type": "string"
+                        },
+                        {
+                          "name": "scheduledArrival",
+                          "type": "string"
+                        },
+                        {
+                          "name": "scheduledDeparture",
+                          "type": "string"
+                        }
+                      ],
+                      "name": "schedule",
+                      "type": "record"
+                    }
+                  },
+                  {
+                    "name": "dummyCall",
+                    "type": "string"
+                  },
+                  {
+                    "name": "omitReason",
+                    "type": "string"
+                  },
+                  {
+                    "name": "actual",
+                    "type": {
+                      "connect.name": "emp.maersk.com.actual",
+                      "fields": [
+                        {
+                          "name": "actualArrival",
+                          "type": "string"
+                        },
+                        {
+                          "name": "actualDeparture",
+                          "type": "string"
+                        },
+                        {
+                          "name": "arrivalAtPilotStation",
+                          "type": "string"
+                        },
+                        {
+                          "name": "firstPilotOnBoard",
+                          "type": "string"
+                        },
+                        {
+                          "name": "pilotOff",
+                          "type": "string"
+                        }
+                      ],
+                      "name": "actual",
+                      "type": "record"
+                    }
+                  },
+                  {
+                    "name": "notes",
+                    "type": "string"
+                  },
+                  {
+                    "name": "updatedBy",
+                    "type": "string"
+                  }
+				],
+                "name": "scheduleEntry_record",
+                "type": "record"
+              },
+              "type": "array"
+            }
+          }
+        ],
+        "name": "scheduleEntries",
+        "type": "record"
+      }
+    }
+  ],
+  "name": "datedSchedule",
+  "namespace": "emp.maersk.com",
+  "type": "record"
+}

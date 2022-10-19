@@ -1,6 +1,7 @@
 package net.apmoller.crb.ohm.microservices.GSISKafka.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.confluent.kafka.serializers.KafkaAvroDeserializerConfig;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -92,6 +93,7 @@ public class Config {
         properties.put("schema.registry.basic.auth.user.info", schemaRegistryAuthUserInfo);
         properties.put("basic.auth.user.info", basicAuthInfo);
         properties.put("basic.auth.credentials.source", basicAuthCredentialsSource);
+        properties.put(KafkaAvroDeserializerConfig.SPECIFIC_AVRO_READER_CONFIG, true);
         //addTruststoreProperties(properties);
         DefaultKafkaConsumerFactory<String, Object> gsisCf = new DefaultKafkaConsumerFactory<>(properties);
 

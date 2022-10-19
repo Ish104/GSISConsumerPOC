@@ -1,16 +1,13 @@
 package net.apmoller.crb.ohm.microservices.GSISKafka.consumer;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import emp.maersk.com.datedSchedule;
 import lombok.RequiredArgsConstructor;
-
-import net.apmoller.crb.ohm.microservices.GSISKafka.models.gsis.ScheduleEntries;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.header.Header;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 import java.nio.charset.StandardCharsets;
@@ -23,18 +20,15 @@ public class GSISConsumer {
 
     @KafkaListener(topics = {
             "${kafka.consumer.topics.gsis-topic}" }, groupId = "#{'${kafka.consumer.groupIds.gsis-group-id}'}", containerFactory = "gsisListenerContainerFactory")
-    public void recievingKafkaMessage( @Payload ConsumerRecord<String, Object> request,
+    public void recievingKafkaMessage(  ConsumerRecord<String, datedSchedule> request,
                                               Acknowledgment acknowledgment) {
-        ScheduleEntries scheduleEntries=null;
         try
         {
-            scheduleEntries=new ObjectMapper().readValue(String.valueOf(request),ScheduleEntries.class);
-            log.info("scheduleEntries object: "+scheduleEntries.getScheduleEntry().get(0).getArrivalStatus());
-//            if(checkScheduleEtaUpdatedEvent(request))
-//            {
-//                scheduleEntries=new ObjectMapper().readValue(String.valueOf(request),ScheduleEntries.class);
-//                log.info("scheduleEntries object: "+scheduleEntries.getScheduleEntry().getArrivalStatus());
-//            }
+
+            if(checkScheduleEtaUpdatedEvent(request))
+            {
+                log.info("datedSchedule object: "+ request.value());;
+            }
 
         }
         catch(Exception e)
@@ -45,7 +39,7 @@ public class GSISConsumer {
         }
 
 
-     private boolean checkScheduleEtaUpdatedEvent(ConsumerRecord<String, Object> request)
+     private boolean checkScheduleEtaUpdatedEvent(ConsumerRecord<String, datedSchedule> request)
      {
          for(Header headers:request.headers())
          {

@@ -31,7 +31,7 @@ public class Config {
     private String bootstrapServers;
     @Value("${kafka.consumer.groupIds.gsis-group-id}")
     private String gsisConsumerGroupId;
-    @Value("${kafka.consumer.auto-offset-reset:earliest}")
+    @Value("${kafka.consumer.auto-offset-reset:latest}")
     private String consumerOffsetAutoReset;
     @Value("${kafka.properties.max.poll.records}")
     private String consumerMaxPollRecords;
@@ -94,6 +94,11 @@ public class Config {
         properties.put("basic.auth.user.info", basicAuthInfo);
         properties.put("basic.auth.credentials.source", basicAuthCredentialsSource);
         properties.put(KafkaAvroDeserializerConfig.SPECIFIC_AVRO_READER_CONFIG, true);
+        properties.put(ConsumerConfig.FETCH_MIN_BYTES_CONFIG, 1000000);
+        properties.put(ConsumerConfig.FETCH_MAX_WAIT_MS_CONFIG,100);
+        properties.put(ConsumerConfig.DEFAULT_API_TIMEOUT_MS_CONFIG,60000);
+        properties.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG,false);
+
         //addTruststoreProperties(properties);
         DefaultKafkaConsumerFactory<String, Object> gsisCf = new DefaultKafkaConsumerFactory<>(properties);
 

@@ -38,8 +38,28 @@ public class GSISConsumer {
         acknowledgment.acknowledge();
         }
 
+    @KafkaListener(topics = {
+            "${kafka.consumer.topics.gsis-topic}" }, groupId = "#{'${kafka.consumer.groupIds.gsis-group-id}'}", containerFactory = "gsisListenerContainerFactory")
+    public void recievingKafkaMessage2(  ConsumerRecord<String, datedSchedule> request,
+                                        Acknowledgment acknowledgment) {
+        try
+        {
 
-     private boolean checkScheduleEtaUpdatedEvent(ConsumerRecord<String, datedSchedule> request)
+            if(checkScheduleEtaUpdatedEvent(request))
+            {
+                log.info("datedSchedule object: "+ request.value());;
+            }
+
+        }
+        catch(Exception e)
+        {
+            log.error("issue while consuming gsis data");
+        }
+        acknowledgment.acknowledge();
+    }
+
+
+    private boolean checkScheduleEtaUpdatedEvent(ConsumerRecord<String, datedSchedule> request)
      {
          for(Header headers:request.headers())
          {
@@ -48,10 +68,10 @@ public class GSISConsumer {
                 String value=new String(headers.value(),StandardCharsets.UTF_8);
                 if(value.equalsIgnoreCase("VesselDatedScheduleEtaUpdated"))
                 {
-                    log.info("recieved VesselDatedScheduleEtaUpdated event: "+value);
+                    log.info("recieved VesselDatedScheduleEtaUpdated event: "+value+": "+request.partition()+" , "+request.offset());
                     return true;
                 }
-                log.info("event name: "+value);
+                //log.info("event name: "+value+": "+request.partition()+" , "+request.offset());
                 return false;
              }
          }
